@@ -15,9 +15,6 @@ env/
 /dataset/
 /Food 101.zip
 
-# Local notes and generated samples
-/Notes/
-/sample_out_0.png
 
 # Training artifacts
 *.pth
