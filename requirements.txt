@@ -1,0 +1,13 @@
+torch
+torchvision
+matplotlib
+jupyter
+ipykernel
+numpy
+pandas
+Pillow
+tqdm
+kagglehub
+torchmetrics
+torch-fidelity
+tensorflow

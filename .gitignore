@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local datasets and archives
+/dataset/
+/Food 101.zip
+
+# Local notes and generated samples
+/Notes/
+/sample_out_0.png
+
+# Training artifacts
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.keras
+*.log
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+kaggle.json
