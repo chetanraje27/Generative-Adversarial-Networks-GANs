@@ -1,74 +1,66 @@
 # Generative Adversarial Networks (GANs)
 
-This project explores image generation with **Vanilla GANs** and **Deep
-Convolutional GANs (DCGANs)** using PyTorch and TensorFlow. The examples use
-the Food-101 image dataset.
+This project compares **Vanilla GANs** and **Deep Convolutional GANs (DCGANs)**
+for food-image generation with PyTorch and the Food-101 dataset.
+
+## Main project
+
+[`GAN.ipynb`](./GAN.ipynb) is the primary project file. It downloads Food-101
+with `kagglehub`, selects 1,000 images from each of five classes (pizza, sushi,
+donuts, hamburgers, and ice cream), trains both GAN architectures, plots
+training progress, and saves the trained generator weights.
+
+Open `GAN.ipynb` in Google Colab or Jupyter and run its cells in order. A
+GPU-enabled runtime is recommended: the notebook trains both models for up to
+300 epochs, which can take a long time on CPU. The notebook downloads the data
+automatically; no local Food-101 folder setup is needed for this workflow.
 
 ## Project contents
 
 | File | Description |
 | --- | --- |
-| `gan_comparison.py` | Trains and compares a Vanilla GAN and a DCGAN using PyTorch. |
-| `Vanilla_GAN.ipynb` | Notebook implementation of a Vanilla GAN in PyTorch. |
-| `DCGAN.ipynb` | Notebook implementation of a DCGAN in PyTorch. |
-| `GAN.ipynb` | PyTorch experiment comparing GANs on selected Food-101 classes. |
-| `DCGAN-genai.ipynb` | TensorFlow GAN experiments, intended for Google Colab. |
+| `GAN.ipynb` | **Main project:** trains and compares Vanilla GAN and DCGAN on selected Food-101 classes using PyTorch. |
+| `gan_comparison.py` | Standalone PyTorch comparison script; expects Food-101 images in the local folder described below. |
+| `Vanilla_GAN.ipynb` | Separate PyTorch Vanilla GAN example. |
+| `DCGAN.ipynb` | Separate PyTorch DCGAN example. |
+| `DCGAN-genai.ipynb` | Additional TensorFlow GAN experiments, intended for Google Colab. |
 
 ## Requirements
 
-- Python with versions supported by the frameworks listed in `requirements.txt`
-- Food-101 data for the PyTorch script and PyTorch notebooks
-- A Kaggle account/token for the Colab notebook; GPU access is recommended for
-  practical training times
-
-Install the dependencies in a virtual environment (Windows PowerShell):
+The main notebook installs `torchmetrics`, `torch-fidelity`, and `kagglehub`
+in its first cell. For local Jupyter use, install the project dependencies in a
+virtual environment (Windows PowerShell):
 
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
+jupyter lab
 ```
 
 For CUDA-enabled PyTorch, follow the installation selector at
 [pytorch.org](https://pytorch.org/get-started/locally/) and choose the build
-matching your CUDA setup. The models can also run on CPU, but training will be
-much slower.
+matching your CUDA setup. The main notebook can download the public dataset
+through `kagglehub`; if Kaggle requests authentication, configure credentials
+using Kaggle's recommended method and never commit them to this repository.
 
-## Food-101 data
+## Running the standalone script
 
-Dataset files are intentionally not stored in this repository. Download Food-101
-from the [official dataset page](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)
-or the source configured in a notebook, then extract it so the image directory
-contains class folders, for example:
+The standalone `gan_comparison.py` script and the two separate image-folder
+notebooks expect Food-101 to be downloaded and extracted locally. The expected
+image directory is `dataset/food-101/food-101/images`, containing class
+subfolders. Dataset files are not included in this repository.
 
-```text
-dataset/food-101/food-101/images/apple_pie/*.jpg
-dataset/food-101/food-101/images/bibimbap/*.jpg
-```
-
-The PyTorch script and image-folder notebooks expect the images at
-`dataset/food-101/food-101/images`. If the extracted archive has a different
-folder structure, update `image_dir` in the notebook you are using.
-
-`GAN.ipynb` downloads Food-101 with `kagglehub`. `DCGAN-genai.ipynb` is designed
-for Google Colab and uses the Colab Secrets facility for the Kaggle API token.
-Create a Colab secret named `KAGGLE_API_TOKEN` and grant the notebook access to
-it. Do not put API tokens or other credentials in notebook cells or commit them
-to Git.
-
-## Run the PyTorch comparison
-
-From the repository root, with the dataset in the layout above:
+Run the script from the repository root after placing the dataset in that
+location:
 
 ```powershell
 python gan_comparison.py
 ```
 
 The script uses five epochs by default. Adjust its configuration values to
-change the training duration, batch size, or model dimensions. The notebooks
-contain their own training configuration and can be opened in Jupyter or VS
-Code.
+change the training duration, batch size, or model dimensions.
 
 ## Dataset citation
 
